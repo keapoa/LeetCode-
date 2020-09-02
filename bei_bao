@@ -93,3 +93,18 @@ class Solution:
                         #优化的时候只需要遍历到zeros,ones,此时这里的代码是dp[i][j]=dp[i][j],是不变的，类似于直接把上一次迭代copy下来。
                         dp[v][i][j] = dp[v-1][i][j]
         return dp[-1][-1][-1]
+        #优化
+        length = len(strs)
+        dp = [[0 for _ in range(n+1)] for _ in range(m+1)]
+        #从1开始，本质也是遍历length次
+        for v in range(1,length+1):
+            #数组从0开始
+            zeros = strs[v-1].count("0")
+            ones = strs[v-1].count("1")
+            #这里还要倒着遍历
+            for i in range(m,zeros-1,-1):
+                for j in range(n,ones-1,-1):
+                    #这里min_count = min(i//zeros,j//ones,count),count为给与的数组对应元素的个数
+                    for k in range(1,min_count+1):
+                    dp[i][j] = max(dp[i-zeros*k][j-ones*k]+1,dp[i][j])
+        return dp[-1][-1]
