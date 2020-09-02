@@ -52,7 +52,8 @@ class Solution:
                         k = 1
                         #保存上一个状态值，while遍历的时候，会不断更新上一个状态dp[v-1][i][j]的值
                         #tmp = dp[v-1][i][j],这里可以不要，因为我们返回的是最后一个结果
-                        while k*zeros <=i and k*ones<=j:
+                        #这里本质是找到用1->k的过程中用多少当前物品得到当前最优值。
+                        while k*zeros<=i and k*ones<=j:
                             dp[v][i][j] = max(dp[v-1][i-k*zeros][j-k*ones]+1,dp[v-1][i][j])
                             #这里更新一下dp[v-1][i][j]
                             dp[v-1][i][j] = dp[v][i][j]
@@ -69,8 +70,10 @@ class Solution:
             #数组从0开始
             zeros = strs[v-1].count("0")
             ones = strs[v-1].count("1")
+            #选定一个v,后面遍历过程，其实就是v在不断复用的过程1->k。
             for i in range(zeros,m+1):
                 for j in range(ones,n+1):
+                    #对比未优化的,未优化的其实是在满足条件i >= zeros,j >= ones不断更新dp,变为二维数组正好是下面代码的意思          
                     dp[i][j] = max(dp[i-zeros][j-ones]+1,dp[i][j])
         return dp[-1][-1]
         #多重背包：限制物品个数，也就是数组里面元素的个数
