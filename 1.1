@@ -1,0 +1,113 @@
+class Solution:
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+        #总结：背包问题：第一，明确给出包的量（约束条件）第二，明确所求的最值。
+        #第三dp定义：数组长度一般会+1，目的是考虑物品背包为0时候的状态。变量i,j表示背包量和当前物品，dp表示所求最大值，先遍历物品在遍历背包量
+        #一个str[i]可以当做一个物品，m和n为能装的最大0和1的限制
+        #求最大利益，也就是能获取的最大物品个数
+        #未优化的，弄个三维数组,时间空间复杂度都上来了。。。
+        length = len(strs)
+        dp = [[[0 for _ in range(n+1)] for _ in range(m+1)] for _ in range(length+1)]
+        #从1开始，本质也是遍历length次
+        for v in range(1,length+1):
+            #数组从0开始
+            zeros = strs[v-1].count("0")
+            ones = strs[v-1].count("1")
+            for i in range(m+1):
+                for j in range(n+1):
+                    if i >= zeros and j >= ones:
+                        #这里dp[v][i][j]只跟v-1维度结果有关，所有可以优化，因为从前到后遍历会导致前面状态已经更新，所以从后往前遍历。
+                        dp[v][i][j] = max(dp[v-1][i-zeros][j-ones]+1,dp[v-1][i][j])
+                    else:
+                        #优化的时候只需要遍历到zeros,ones,此时这里的代码是dp[i][j]=dp[i][j],是不变的，类似于直接把上一次迭代copy下来。
+                        dp[v][i][j] = dp[v-1][i][j]
+        return dp[-1][-1][-1]    
+        #优化二维数组
+        """
+        #定义dp[i][j]为i个0,j个1能获取的最大物品个数
+        dp = [[0 for _ in range(n+1)] for _ in range(m+1)]
+        #状态转移:dp[i][j] = max(dp[i-zeros][j-ones]+1,dp[i][j]),这里意思是如果当前str[i]加入背包和不加入背包的两种状态
+        for v in range(len(strs)):
+            zeros = strs[v].count("0")
+            ones = strs[v].count("1")
+            #这里倒着遍历原因：每个字符串只能使用一次(有限背包)，（这里不好理解,三维数组优化而来的），
+            #遍历到zeros，ones的原因：一旦超过这个，就装不进去了。
+            for i in range(m,zeros-1,-1):
+                for j in range(n,ones-1,-1):
+                    dp[i][j] = max(dp[i-zeros][j-ones]+1,dp[i][j])
+        return dp[-1][-1]
+        """
+        #扩展成完全背包问题：不限制0和1的个数,也就是m和n可以无限大
+        length = len(strs)
+        dp = [[[0 for _ in range(n+1)] for _ in range(m+1)] for _ in range(length+1)]
+        #从1开始，本质也是遍历length次
+        for v in range(1,length+1):
+            #数组从0开始
+            zeros = strs[v-1].count("0")
+            ones = strs[v-1].count("1")
+            print(v)
+            for i in range(m+1):
+                for j in range(n+1):
+                    if i >= zeros and j >= ones:
+                        #这里是优化的代码，不限制0和1个数的时候
+                        k = 1
+                        #保存上一个状态值，while遍历的时候，会不断更新上一个状态dp[v-1][i][j]的值
+                        #tmp = dp[v-1][i][j],这里可以不要，因为我们返回的是最后一个结果
+                        #这里本质是找到用1->k的过程中用多少当前物品得到当前最优值。
+                        while k*zeros<=i and k*ones<=j:
+                            dp[v][i][j] = max(dp[v-1][i-k*zeros][j-k*ones]+1,dp[v-1][i][j])
+                            #这里更新一下dp[v-1][i][j]
+                            dp[v-1][i][j] = dp[v][i][j]
+                            k+=1
+                    else:
+                        #优化的时候只需要遍历到zeros,ones,此时这里的代码是dp[i][j]=dp[i][j],是不变的，类似于直接把上一次迭代copy下来。
+                        dp[v][i][j] = dp[v-1][i][j]
+        return dp[-1][-1][-1]
+        #完全背包优化写法,是0/1背包正向遍历即可
+        length = len(strs)
+        dp = [[0 for _ in range(n+1)] for _ in range(m+1)]
+        #从1开始，本质也是遍历length次
+        for v in range(1,length+1):
+            #数组从0开始
+            zeros = strs[v-1].count("0")
+            ones = strs[v-1].count("1")
+            #选定一个v,后面遍历过程，其实就是v在不断复用的过程1->k。
+            for i in range(zeros,m+1):
+                for j in range(ones,n+1):
+                    #对比未优化的,未优化的其实是在满足条件i >= zeros,j >= ones不断更新dp,变为二维数组正好是下面代码的意思          
+                    dp[i][j] = max(dp[i-zeros][j-ones]+1,dp[i][j])
+        return dp[-1][-1]
+        #多重背包：限制物品个数，也就是数组里面元素的个数
+        length = len(strs)
+        dp = [[[0 for _ in range(n+1)] for _ in range(m+1)] for _ in range(length+1)]
+        for v in range(1,length+1):
+            zeros = strs[v-1].count("0")
+            ones = strs[v-1].count("1")
+            for i in range(m+1):
+                for j in range(n+1):
+                    if i >= zeros and j >= ones:
+                        k = 1
+                        #可以在这里加上限制k的次数就行了，且min_count = min(i//zeros,j//ones,count),count为给与的数组对应元素的个数
+                        while k*zeros <=i and k*ones<=j and k<=min_count:
+                            dp[v][i][j] = max(dp[v-1][i-k*zeros][j-k*ones]+1,dp[v-1][i][j])
+                            #这里更新一下dp[v-1][i][j]
+                            dp[v-1][i][j] = dp[v][i][j]
+                            k+=1
+                    else:
+                        #优化的时候只需要遍历到zeros,ones,此时这里的代码是dp[i][j]=dp[i][j],是不变的，类似于直接把上一次迭代copy下来。
+                        dp[v][i][j] = dp[v-1][i][j]
+        return dp[-1][-1][-1]
+        #优化
+        length = len(strs)
+        dp = [[0 for _ in range(n+1)] for _ in range(m+1)]
+        #从1开始，本质也是遍历length次
+        for v in range(1,length+1):
+            #数组从0开始
+            zeros = strs[v-1].count("0")
+            ones = strs[v-1].count("1")
+            #这里还要倒着遍历
+            for i in range(m,zeros-1,-1):
+                for j in range(n,ones-1,-1):
+                    #这里min_count = min(i//zeros,j//ones,count),count为给与的数组对应元素的个数
+                    for k in range(1,min_count+1):
+                    dp[i][j] = max(dp[i-zeros*k][j-ones*k]+1,dp[i][j])
+        return dp[-1][-1]
