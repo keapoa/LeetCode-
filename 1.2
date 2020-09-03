@@ -1,0 +1,103 @@
+class Solution(object):
+    def coinChange(self, coins, amount):
+        """
+        :type coins: List[int]
+        :type amount: int
+        :rtype: int
+        """
+        #定义dp[i][j]:i种面额硬币能凑出amount的硬币个数是多少，且硬币是无限的，完全背包问题
+        #递推公式dp[i][j]也就是[0,i]种面额，凑成金额的硬币个数，它可能等于[i-1]种面额凑成金额的硬币最小个数，也可能用了
+        #这里是最小用的min. 初始化为最大，这个值最大不可能达到即可，比如amount+1就达不到
+        """
+        m = len(coins)
+        dp = [[amount+1 for _ in range(amount+1)] for _ in range(m+1)]
+        dp[0][0] = 0
+        for i in range(1,m+1):
+            coin = coins[i-1]
+            for j in range(amount+1):
+                if j>=coin:
+                    #这里为啥是dp[i][j-coin]
+                    #解析:dp[i][j] = min(dp[i-1][j],dp[i-1][j-coin]+1,dp[i-1][j-2*coin],...,dp[i-1][j-k*coin]+k)
+                    #而dp[i][j-c] = min(dp[i-1][j-coin],dp[i-1][j-coin*2]+1,...,dp[i-1][j-k*coin]+k-1),这里我们只需要用dp[i][j-c]代替上面即可，免除了大量的冗余计算。
+                    #
+                    dp[i][j] = min(dp[i-1][j],dp[i][j-coin]+1)
+                else:
+                    dp[i][j] = dp[i-1][j]
+        return dp[-1][-1] if dp[-1][-1]!=amount+1 else -1
+        """
+        #优化成一维度数据
+        m = len(coins)
+        dp = [amount+1 for _ in range(amount+1)]
+        dp[0] = 0
+        for i in range(1,m+1):
+            coin = coins[i-1]
+            for j in range(coin,amount+1):
+                #上面是dp[i][j]后面还有个dp[i][j-coin]为啥可以优化呢，这是因为我们这次从前面往后面遍历，dp[i][j-c]已经被更新过了，所以这个可以直接转为一维度数组。
+                dp[j] = min(dp[j],dp[j-coin]+1)                
+        return dp[-1] if dp[-1]!=amount+1 else -1
+        #拓展成0/1背包问题，每个硬币只用一次
+        m = len(coins)
+        dp = [[amount+1 for _ in range(amount+1)] for _ in range(m+1)]
+        dp[0][0] = 0
+        for i in range(1,m+1):
+            coin = coins[i-1]
+            for j in range(amount+1):
+                if j>=coin:             
+                    dp[i][j] = min(dp[i-1][j],dp[i-1][j-coin]+1)
+                else:
+                    dp[i][j] = dp[i-1][j]
+        return dp[-1][-1] if dp[-1][-1]!=amount+1 else -1
+        #优化
+        m = len(coins)
+        dp = [amount+1 for _ in range(amount+1)]
+        dp[0] = 0
+        for i in range(1,m+1):
+            coin = coins[i-1]
+            for j in range(amount+1):
+                if j>=coin:             
+                    dp[j] = min([j],[j-coin]+1)         
+        return dp[-1] if dp[-1]!=amount+1 else -1
+        #多重背包
+        m = len(coins)
+        dp = [[amount+1 for _ in range(amount+1)] for _ in range(m+1)]
+        dp[0][0] = 0
+        for i in range(1,m+1):
+            coin = coins[i-1]
+            for j in range(amount+1):
+                if j>=coin:
+                    k = 1
+                    #这里s[i]对应硬币个数
+                    while k <= s[i] and k*coin<=j:
+                        dp[i][j] = min(dp[i-1][j],dp[i-1][j-k*coin]+1)
+                        dp[i][j] = dp[i][j]
+                        k++1
+                else:
+                    dp[i][j] = dp[i-1][j]
+        return dp[-1][-1] if dp[-1][-1]!=amount+1 else -1
+        #优化
+        m = len(coins)
+        dp = [amount+1 for _ in range(amount+1)]
+        dp[0] = 0
+        for i in range(1,m+1):
+            coin = coins[i-1]
+            for j in range(amount+1):
+                if j>=coin:
+                    while k<=s[i] and k*coin<=j:   
+                        dp[j] = min([j],[j-k*coin]+1)
+                        k+=1
+        return dp[-1] if dp[-1]!=amount+1 else -1
+        ###########################################
+        #其它方法，这里像是一个数字有多少组合数，可以递归路径的形式写
+        def dp(n):
+            #终止条件
+            res = float("inf")
+            if n==0:return 0
+            #剪枝
+            if n < 0:return -1
+            for coin in coins:
+                #剪枝
+                if dp(n-coin)==-1:continue
+                res = min(dp(n-coin)+1,res)
+            return -1 if res==float("inf") else res
+        return dp(amount)
+        
