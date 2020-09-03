@@ -1,0 +1,64 @@
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        
+        #dp定义：i种面额组成金额为amount的方式有多少种
+        #这种也超时
+        """
+        m = len(coins)
+        dp = [[0 for i in range(amount+1)] for _ in range(m+1)]
+        #这里初始化为啥为1，这里的意思是总金额数为0的时候,组合数为1
+        dp[0][0] = 1
+        for i in range(1,m+1):
+            coin = coins[i-1]
+            for j in range(amount+1):
+                k = 0
+                while k*coin <= j:
+                    dp[i][j] += dp[i-1][j-k*coin]
+                    k+=1   
+        return dp[-1][-1]
+        """
+        #优化时间
+        """
+        m = len(coins)
+        dp = [[0 for i in range(amount+1)] for _ in range(m+1)]
+        #这里初始化为啥为1，这里的意思是总金额数为0的时候,组合数为1，意思就是只有一种做法，那就是不选任何硬币？？？神奇
+        dp[0][0] = 1
+        for i in range(1,m+1):
+            coin = coins[i-1]
+            for j in range(amount+1):
+                dp[i][j]=dp[i-1][j]
+                if j >= coin:
+                    #这里与上面优化的区别是把最内层循环给弄掉了，为啥呢.
+                    #这里本质dp[i][j-coin]包含了上面所有的情况，，dp[i-1][j-coin]+dp[i-1][j-coin*2]...所有情况。避免重复运算。coins[i]可以重复运算的。
+                    dp[i][j]+=dp[i][j-coin]   
+        return dp[-1][-1]
+        """
+        #优化空间
+        m = len(coins)
+        dp = [0 for i in range(amount+1)]
+        dp[0] = 1
+        for i in range(1,m+1):
+            coin = coins[i-1]
+            for j in range(amount+1):
+                if j >= coin:
+                    dp[j] = dp[j]+dp[j-coin]
+        return dp[-1]
+        """
+        #超时了
+        def dic(lis):
+            dic_ = {}
+            for i in lis:
+                dic_[i] = dic_.get(i,0) + 1
+            return dic_
+        self.lis=[]
+        def DFS(amount,path):
+            if amount==0:
+                if dic(path) not in self.lis:
+                    self.lis.append(dic(path))
+            if amount < 0:
+                return
+            for coin in coins:
+                DFS(amount-coin,path+[coin])
+        DFS(amount,[])
+        return len(self.lis)
+        """
