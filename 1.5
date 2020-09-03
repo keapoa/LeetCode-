@@ -1,0 +1,93 @@
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        
+        if sum(nums)%2!=0:
+            return False
+        else:
+            target = sum(nums)//2
+        
+        """
+        #0-1背包问题，这里一个target需要多少个nums和刚好能装好这个
+        #构建数组,这里等于target，因此数组列要到target+1，数组含义:到i索引能否组成和为target
+        dp = [[False for _ in range(target+1)] for _ in range(len(nums))]
+        #对第0行初始化
+        if nums[0] <= target:
+            dp[0][nums[0]]=True
+        for i in range(1,len(nums)):
+            for j in range(target+1):
+                dp[i][j] = dp[i-1][j]
+                if j==nums[i]:
+                    dp[i][j] = True
+                if j > nums[i]:
+                    dp[i][j] = dp[i-1][j] or dp[i-1][j-nums[i]]
+        return dp[len(nums)-1][target]
+        """
+        """
+        #优化
+        #分析，由于dp[i][j]=dp[i-1][j]可知道，当前行值只跟上一行的数组值有关系，因为可以维护一个一维数组。不断更新即可。
+        #有么有发现下面的只是把i-1去掉了
+        dp = [False for i in range(target+1)]
+        #初始化->这里不初始化dp[0] = True能通过，最好初始化为True，因为j-nums[i]=0,此时正好是一个元素等于和，也满足条件，后面的范围可以定为target->nums[i]-1。
+        #dp[0] = True
+        if nums[0]<=target:
+            dp[nums[0]]=True
+        for i in range(1,len(nums)):
+            #右后向前遍历，原因：j>=nums[i],如果从前往后遍历的话，第一：需要保证j > nums[i],当满足这个条件后，
+            
+            for j in range(target,nums[i],-1):
+
+                #这里如果dp[target]已经找到，可以返回了
+                if dp[target]:
+                    return True
+                dp[j] = dp[j] or dp[j-nums[i]]
+        """
+        """
+            #从前往后试一下,会出错，思考下，二维数组的填充过程，下一行数组用的dp[j-nums[i]]是上一维度的数值，而在这里，用一维的时候，当前i循环时，前面j-nums[i]已经被更新了。
+            #可以看下[2,2,3,5],i=1时候，此时i=1，j=2,dp[2]=2 i=1,j=4,dp[4]=4 i=1,j=6,dp[6]此时用到dp[6-2]是前面更新的值，而在二维数组中，dp[0][4]还是False。
+            #而逆序时候，能够保证前面没有被更新 
+            for j in range(nums[i],target+1):
+                if dp[target]:
+                    return True
+                dp[j] = dp[j] or dp[j-nums[i]]
+        """
+        """
+
+        return dp[target]
+        """
+        nums.sort(reverse=True)
+        if nums[0] > target:
+            return False
+        #这里是一个数组，找出子数组和等于target，有么有发现跟DFS或者二叉树很相似。#如果不逆排序，会超时哦
+        def DFS(nums,path_sum):
+            if path_sum == target:
+                return True
+            if path_sum > target:
+                return False
+            for i in range(len(nums)):
+                if DFS(nums[i+1:],path_sum+nums[i]):
+                    return True
+            return False
+        
+        return DFS(nums,0)
+        
+        """
+        if not nums: return True
+        total = sum(nums)
+        if total & 1:  # 和为奇数
+            return False
+        total = total >> 1  # 除2
+        nums.sort(reverse=True)  # 逆排序
+        if total < nums[0]:  # 当数组最大值超过总和的一半
+            return False
+        return self.dfs(nums, total)
+
+    def dfs(self, nums, total):
+        if total == 0:
+            return True
+        if total < 0:
+            return False
+        for i in range(len(nums)):
+            if self.dfs(nums[i+1:], total - nums[i]):  # 除去i及其之前，保证每个数只用一次
+                return True
+        return False
+        """
