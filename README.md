@@ -20,7 +20,7 @@
         #回文通常利用二维数组：回文的判断需要左右两个边界，这里子串要注意相邻相同的情况。其它一维即可。
         https://leetcode-cn.com/problems/longest-palindromic-subsequence/  最长回文子序列    
         https://leetcode-cn.com/problems/longest-palindrome/ 最长回文串--这个意思是给的字符串能组合成的最长回文串  
-        https://leetcode-cn.com/problems/longest-palindromic-substring/ 最长回文子串
-        https://leetcode-cn.com/problems/longest-increasing-subsequence/  最长上升子序列  
+        https://leetcode-cn.com/problems/longest-palindromic-substring/ 最长回文子串  
+        https://leetcode-cn.com/problems/longest-increasing-subsequence/  最长上升子序列    
         https://leetcode-cn.com/problems/longest-common-subsequence/  最长公共子序列  
         https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/  最长连续递增序列  这个直接滑动窗口就行。
