@@ -1,5 +1,5 @@
 # LeetCode-
-总结一些经典Leetcode题目写法---对应代码在同名文件中。比如1.1对应1.1  
+总结一些经典Leetcode题目写法---对应代码在同名文件中。比如1.1对应1.1，后面对应的都是数字_+对应类别问题  
 动态规划系列  
     一, 背包问题(均可拓展成0/1背包,完全背包,多重背包)。  
         总结各种套路：    
@@ -16,7 +16,11 @@
         1.3 https://leetcode-cn.com/problems/coin-change-2/ 零钱兑换2  
         1.4 https://leetcode-cn.com/problems/combination-sum-iv/ 组合总和IV  
         1.5 https://leetcode-cn.com/problems/partition-equal-subset-sum/ 分割等和子集  
-    二, 子序列子串问题    
+    二, 子序列子串问题
+        #回文通常利用二维数组：回文的判断需要左右两个边界，这里子串要注意相邻相同的情况。其它一维即可。
         https://leetcode-cn.com/problems/longest-palindromic-subsequence/  最长回文子序列    
         https://leetcode-cn.com/problems/longest-palindrome/ 最长回文串--这个意思是给的字符串能组合成的最长回文串  
-        https://leetcode-cn.com/problems/longest-palindromic-substring/ 最长回文子串  
+        https://leetcode-cn.com/problems/longest-palindromic-substring/ 最长回文子串
+        https://leetcode-cn.com/problems/longest-increasing-subsequence/  最长上升子序列  
+        https://leetcode-cn.com/problems/longest-common-subsequence/  最长公共子序列  
+        https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/  最长连续递增序列  这个直接滑动窗口就行。
