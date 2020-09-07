@@ -16,8 +16,8 @@
         1.3 https://leetcode-cn.com/problems/coin-change-2/ 零钱兑换2  
         1.4 https://leetcode-cn.com/problems/combination-sum-iv/ 组合总和IV  
         1.5 https://leetcode-cn.com/problems/partition-equal-subset-sum/ 分割等和子集  
-    二, 子序列子串问题
-        #回文通常利用二维数组：回文的判断需要左右两个边界，这里子串要注意相邻相同的情况。其它一维即可。
+    二, 子序列子串问题  
+        #回文通常利用二维数组：回文的判断需要左右两个边界，这里子串要注意相邻相同的情况。其它一维即可。  
         https://leetcode-cn.com/problems/longest-palindromic-subsequence/  最长回文子序列    
         https://leetcode-cn.com/problems/longest-palindrome/ 最长回文串--这个意思是给的字符串能组合成的最长回文串  
         https://leetcode-cn.com/problems/longest-palindromic-substring/ 最长回文子串  
