@@ -1,0 +1,59 @@
+class Solution:
+    def nthUglyNumber(self, n: int) -> int:
+        """
+        def ugly(num):
+            if num==0:return False
+            if num==1:return True
+            while num:
+                if num%2==0:
+                    num//=2
+                elif num%3==0:
+                    num//=3
+                elif num%5==0:
+                    num//=5
+                else:
+                    break
+            return True if num==1 else False
+        count=0
+        if n==1:return 1
+        i = 1
+        count = 0
+        while count < n:
+            if ugly(i):
+                count+=1
+            if count==n:
+                return i
+            i+=1
+        """
+        """
+        #动态规划思路：使得时间复杂度为O(n),也就是直接生成丑数,dp[i]第i+1个丑数是多少，初始化dp[0] = 1
+        #关键递推公式：丑数如何生成的,在递推过程中，一定是某三个数a*2,b*3,c*5中的最小值。其中1<a,b,c<n,第a,b,c个丑数
+        dp = [0 for i in range(n)]
+        dp[0] = 1
+        #定义三个指针,指针的含义是比如a，代表第a+1个丑数。
+        a,b,c = 0,0,0
+        for i in range(1,n):
+            dp[i] = min(dp[a]*2,dp[b]*3,dp[c]*5)
+            if dp[i]==dp[a]*2:a+=1
+            if dp[i]==dp[b]*3:b+=1
+            if dp[i]==dp[c]*5:c+=1
+        return dp[-1]
+        """
+        #最小堆的利用
+        #思路：第一个数是1，然后弹出一个1，1乘以235，加入堆中，在构建最小堆，重复此操作。知道弹出第n个即可。注意，在构建最小堆的时候可能出现重复，所以要去重，另外堆在python中也是个列表。
+        #构建返回的数组
+        import heapq
+        #res = [1]
+        res = 1
+        #堆
+        lis = [1]
+        #构建堆
+        heapq.heapify(lis)
+        for _ in range(n):
+            cur = heapq.heappop(lis)
+            res = cur
+            cur_lis = [cur*2,cur*3,cur*5]
+            #更新堆并重建
+            lis = list(set(cur_lis+lis))
+            heapq.heapify(lis)
+        return res
