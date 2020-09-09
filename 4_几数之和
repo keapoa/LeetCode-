@@ -1,0 +1,41 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        def threeSum(nums3,target3):
+            def twosum(nums2,target2):
+                #排序好的数组
+                #利用双指针
+                i,j = 0, len(nums2)-1
+                res2 = [] 
+                while i < j:
+                    #去重
+                    if i > 0 and nums2[i]==nums2[i-1]:
+                        i+=1
+                        continue
+                    if nums2[i]+nums2[j]==target2:
+                        res2.append([nums2[i],nums2[j]])
+                        i+=1
+                        j-=1
+                    elif nums2[i]+nums2[j] < target2:
+                        i+=1
+                    else:
+                        j-=1
+                return res2
+            out3 = []
+            for i in range(len(nums3)-2):
+                #去重
+                if i > 0 and nums3[i]==nums3[i-1]:
+                    continue
+                res3 = twosum(nums3[i+1:],target3-nums3[i])
+                if res3:
+                    out3.extend([[nums3[i]]+num for num in res3])
+            return out3
+        
+        nums.sort()
+        out = []
+        for i in range(len(nums)-3):
+            if i > 0 and nums[i]==nums[i-1]:
+                continue
+            res = threeSum(nums[i+1:],target-nums[i])
+            if res:
+                out.extend([[nums[i]]+num for num in res])
+        return out
