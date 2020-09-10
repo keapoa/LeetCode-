@@ -38,9 +38,9 @@
         https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/  数据流中的第k大元素  
         https://leetcode-cn.com/problems/merge-k-sorted-lists/submissions/  合并k个升序链表
     六, DFS子集型题目  
-        https://leetcode-cn.com/problems/subsets/  子集
-        https://leetcode-cn.com/problems/subsets-ii/  
-        https://leetcode-cn.com/problems/permutations/  排列
-        https://leetcode-cn.com/problems/permutations-ii/  
-        https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/  字符串排列
-        https://leetcode-cn.com/problems/generate-parentheses/  括号生成
+        https://leetcode-cn.com/problems/subsets/  子集  
+        https://leetcode-cn.com/problems/subsets-ii/    
+        https://leetcode-cn.com/problems/permutations/  排列  
+        https://leetcode-cn.com/problems/permutations-ii/    
+        https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/  字符串排列  
+        https://leetcode-cn.com/problems/generate-parentheses/  括号生成  
