@@ -1,0 +1,78 @@
+class Solution:
+    def smallestK(self, arr: List[int], k: int) -> List[int]:
+        """
+        if k < 0:return -1
+        arr.sort()
+        return arr[:k]
+        """
+        #思路二：堆
+        """
+        #这样写复杂度有点高
+        import heapq
+        if k <= 0:return []
+        if k >=len(arr):return arr
+        #构建大小为m-k的堆，弹出最大值
+        res = []
+        m = len(arr)
+        lis = arr[:m-k]
+        heapq.heapify(lis)
+        for i in range(k):
+            heapq.heappush(lis,arr[m-k+i])
+            #push已经排序了            
+            #heapq.heapify(lis)
+            #弹出的时候不要用lis.pop(),会导致后面出错
+            res.append(heapq.heappop(lis))
+        return res
+        """
+        #构建最小堆
+        import heapq
+        if k <= 0:return []
+        if k >=len(arr):return arr
+        #构建大小为k的堆，弹出最大值,复杂度nlog(m-k)
+        res = []
+        m = len(arr)
+        #lis = arr[:m-k]
+        #heapq.heapify(lis)
+        lis = []
+        for i in range(m):
+            if i < m-k:
+                heapq.heappush(lis,arr[i])
+            else:
+                heapq.heappush(lis,arr[i])
+                #push已经排序了            
+                #heapq.heapify(lis)
+                #弹出的时候不要用lis.pop(),会导致后面出错
+                res.append(heapq.heappop(lis))
+        return res
+        #快排思路：快排每次做比较的时候会返回一个索引，当这个索引为k的时候就返回。
+        if k <= 0:return []
+        if k >=len(arr):return arr
+        """
+        def quicksort(arr,i,j):
+            if i < j:
+                mid = partition(arr,i,j)
+                quicksort(arr,i,mid)
+                quicksort(arr,mid,j)
+        """
+        def partition(arr,i,j):
+            start = arr[i]
+            while i < j:
+                while i < j and start <= arr[j]:
+                    j-=1
+                arr[i] = arr[j]
+                while i < j and start >= arr[i]:
+                    i+=1
+                arr[j] = arr[i]
+                arr[i] = start
+            return i+1
+        i,j = 0,len(arr)-1
+        def quicksort(arr,i,j):
+            if i < j:
+                index = partition(arr,i,j)
+                if index==k-1:
+                    return arr[:k]
+                elif index < k-1:
+                    return quicksort(arr,index,j)
+                else:
+                    return quicksort(arr,i,index)
+        return quicksort(arr,i,j)
