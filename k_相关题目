@@ -76,3 +76,21 @@ class Solution:
                 else:
                     return quicksort(arr,i,index)
         return quicksort(arr,i,j)
+############################################数据流中最大k元素#####################################
+class KthLargest:
+    def __init__(self, k: int, nums: List[int]):
+        #整体思路是构建k最小堆，维护一个k最小堆即可
+        import heapq
+        self.k = k
+        self.nums = nums
+        heapq.heapify(self.nums)
+        while len(self.nums) > k:
+            heapq.heappop(self.nums)
+
+    def add(self, val: int) -> int:
+        #将数据压入其中
+        heapq.heappush(self.nums,val)
+        #本来想直接做一次pop,但这里可能初始可能长度小于k,所以做一次判断
+        if len(self.nums) > self.k:
+            heapq.heappop(self.nums)
+        return self.nums[0]
