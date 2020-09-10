@@ -1,0 +1,57 @@
+##########################括号组合#########################
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        #思路：递归       
+        #我自己的写法：字符串组合思想，剪枝操作：1,相同则剪枝。2,右括号数量大于左括号则剪枝。(核心点)
+        """
+        res = []
+        def DFS(s,path,left,right):
+            if len(path)==2*n:
+                res.append(path)
+                return
+            if right > left:
+                return
+            for i in range(len(s)):
+                #剪枝操作
+                if i > 0 and s[i]==s[i-1]:
+                    continue
+                if s[i]=="(":
+                    DFS(s[:i]+s[i+1:],path+s[i],left+1,right)
+                else:
+                    DFS(s[:i]+s[i+1:],path+s[i],left,right+1)
+                
+        DFS("("*n+")"*n,"",0,0)
+        return res
+        """
+        #思路二，左右括号分开
+        """
+        res = []
+        def DFS(path,left,right):
+            if left > n or right > n or right > left:
+                return
+            if len(path)==2*n:
+                res.append(path)
+            if left > right:    
+                DFS(path+"(",left+1,right)
+                DFS(path+")",left,right+1)
+            if left==right:
+                DFS(path+"(",left+1,right)
+        DFS("",0,0)
+        return res
+        """
+        #思路三：动态规划dp[i]表示i对括号可以生成的组合数，是个列表。那么dp[i-1]对括号与它的关系如何.dp[i] = (dp[i-1-j])+dp[j]
+        #重点思路就是：新增一对括号怎么组合(),i-1里面的组合可能在括号里面，也可能在括号外面。而对比无论是内部还是外部里的括号一定是合法的，那么也就是说起一定是小于j<i个合法括号组合。
+        #这么也就得出递推公式
+        dp = [[] for _ in range(n+1)]
+        dp[0] = [""]
+        for i in range(1,n+1):
+            cur = []
+            for j in range(i):
+                left = dp[j]
+                right = dp[i-1-j]
+                for s1 in left:
+                    for s2 in right:
+                        cur.append("("+s1+")"+s2)
+            dp[i] = cur
+        return dp[n]
+#######################################
