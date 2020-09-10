@@ -44,3 +44,39 @@
         https://leetcode-cn.com/problems/permutations-ii/    
         https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/  字符串排列  
         https://leetcode-cn.com/problems/generate-parentheses/  括号生成  
+    七, DFS路径型题目  
+        https://leetcode-cn.com/problems/path-sum/  路径总和    
+        https://leetcode-cn.com/problems/path-sum-ii/  路径总和Ⅱ    
+        https://leetcode-cn.com/problems/path-sum-iii/  路径总和Ⅲ    
+        https://leetcode-cn.com/problems/minimum-path-sum/  最小路径和    
+    八, BFS类型题目    
+        https://leetcode-cn.com/problems/binary-tree-level-order-traversal/  二叉树的层次遍历    
+        https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/  二叉树的层次遍历Ⅱ    
+        https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/  二叉树的锯齿形层次遍历    
+        https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/  二叉树的层平均值    
+        https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/  二叉树的最小深度    
+        https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/  二叉树的层    
+    九, 翻转链表题目    
+        https://leetcode-cn.com/problems/reverse-linked-list/  反转链表    
+        https://leetcode-cn.com/problems/reverse-linked-list-ii/  反转链表Ⅱ    
+        https://leetcode-cn.com/problems/reverse-nodes-in-k-group/  k个一组反转链表    
+    十, 链表快慢指针    
+       https://leetcode-cn.com/problems/linked-list-cycle/  环形链表    
+       https://leetcode-cn.com/problems/linked-list-cycle-ii/  环形链表Ⅱ    
+       https://leetcode-cn.com/problems/happy-number/  快乐数  非链表    
+       https://leetcode-cn.com/problems/middle-of-the-linked-list/  链表的中间节点  
+    十一, 双指针    
+       https://leetcode-cn.com/problems/two-sum/  两数之和    
+       https://leetcode-cn.com/problems/squares-of-a-sorted-array/  有序数组的平方  
+       https://leetcode-cn.com/problems/subarray-product-less-than-k/  乘积小于k的子数组  
+    十二, 删除重复节点问题  
+       https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/  删除数组中的重复数字  
+       https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/  删除排序数组中的重复项  
+       https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/  删除排序数组中的重复项Ⅱ  
+       https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/  删除排序链表中的重复项  
+       https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/  删除排序链表中的重复项Ⅱ  
+    十三, 滑动窗口题目  
+       https://leetcode-cn.com/problems/subarray-sum-equals-k/  
+       https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/  至少有K个重复字符的最长子串  
+       https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/  无重复字符的最长子串  
+    十四, 子数组子串子序列等  
