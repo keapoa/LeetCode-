@@ -23,12 +23,12 @@
         https://leetcode-cn.com/problems/longest-palindromic-substring/ 最长回文子串  
         https://leetcode-cn.com/problems/longest-increasing-subsequence/  最长上升子序列    
         https://leetcode-cn.com/problems/longest-common-subsequence/  最长公共子序列  
-        https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/  最长连续递增序列  这个直接滑动窗口就行。
-    三, 丑数问题     
+        https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/  最长连续递增序列  这个直接滑动窗口就行。  
+    三, 丑数问题       
         #解法：常规解法：判断丑数->生成。最小堆，动态规划。  
         https://leetcode-cn.com/problems/chou-shu-lcof/submissions/  
-        https://leetcode-cn.com/problems/ugly-number/ 
-    四, 二三四数之和  
+        https://leetcode-cn.com/problems/ugly-number/   
+    四, 二三四数之和    
         #套路题解：排序，双指针求二数之和，注意去重，三数一个循环套用二数之和函数，注意去重，一次类推。  
         https://leetcode-cn.com/problems/4sum/submissions/  
         https://leetcode-cn.com/problems/3sum/  
