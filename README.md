@@ -32,6 +32,6 @@
         #套路题解：排序，双指针求二数之和，注意去重，三数一个循环套用二数之和函数，注意去重，一次类推。  
         https://leetcode-cn.com/problems/4sum/submissions/  
         https://leetcode-cn.com/problems/3sum/  
-        https://leetcode-cn.com/problems/two-sum/ 
+        https://leetcode-cn.com/problems/two-sum/   
     五, k相关题目  
         https://leetcode-cn.com/problems/smallest-k-lcci/submissions/  最小k个数,三种解法。  
