@@ -94,3 +94,45 @@ class KthLargest:
         if len(self.nums) > self.k:
             heapq.heappop(self.nums)
         return self.nums[0]
+############################################合并k个升序链表#####################################  
+class Solution:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        #先归并
+        def merge(l1,l2):
+            res = ListNode(-1)
+            root = res
+            while l1 and l2:
+                if l1.val > l2.val:
+                    root.next = ListNode(l2.val)
+                    l2 = l2.next
+                else:
+                    root.next = ListNode(l1.val)
+                    l1 = l1.next
+                root = root.next
+            while l1:
+                root.next = ListNode(l1.val)
+                root = root.next
+                l1 = l1.next
+            while l2:
+                root.next = ListNode(l2.val)
+                root = root.next
+                l2 = l2.next
+            return res.next
+        #n = len(lists)
+        if not lists:return
+        cur_lists = lists
+        while cur_lists:
+            n = len(cur_lists)
+            if n==1:
+                break
+            tmp = []
+            i = 0
+            while i < n-1:
+                tmp.append(merge(cur_lists[i],cur_lists[i+1]))
+                i = i+2
+            if n%2==0:
+                cur_lists = tmp
+            if n%2==1:
+                tmp.append(cur_lists[-1])
+                cur_lists = tmp
+        return cur_lists[0]
