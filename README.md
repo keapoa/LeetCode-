@@ -54,7 +54,7 @@
         https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/  二叉树的层次遍历Ⅱ    
         https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/  二叉树的锯齿形层次遍历    
         https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/  二叉树的层平均值    
-        https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/  二叉树的最小深度    
+        https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/  二叉树的最小深度  这个比较容易出错    
         https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/  二叉树的层    
     九, 翻转链表题目    
         https://leetcode-cn.com/problems/reverse-linked-list/  反转链表    
