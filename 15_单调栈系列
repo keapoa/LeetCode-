@@ -1,0 +1,32 @@
+########################################滑动窗口最大值################################################
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        """
+        if not nums:return[]
+        n = len(nums)
+        res = []
+        for i in range(n-k+1):
+            res.append(max(nums[i:(i+k)]))
+        return res
+        """
+        #单调双向队列：思路不是很好想
+        #构建队列
+        deque = collections.deque() 
+        #形成初始队列
+        for i in range(k):
+            #当新加入的数据比队列中大的时候，要把小的都弹出来。在加入当前值。
+            while deque and deque[-1] < nums[i]:
+                deque.pop()
+            deque.append(nums[i])
+        res = [deque[0]]
+        #开始形成队列的时候
+        for i in range(k,len(nums)):
+            #首先判断当前值是否等于队列中的第一个值，等于的话要把第一个值弹出来。
+            if deque[0]==nums[i-k]:
+                deque.popleft()
+            #开始弹出小于当前的值
+            while deque and deque[-1] < nums[i]:
+                deque.pop()
+            deque.append(nums[i])
+            res.append(deque[0])
+        return res
