@@ -1,0 +1,89 @@
+###############################快乐数字################################
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        #当n==1的时候，不会循环，当不是快乐数的时候会循环。
+        if n==1:
+            return True
+        def getNum(n):
+            sum_ = 0
+            while n:
+                a = n%10
+                sum_ += a*a
+                n = n//10
+            return sum_
+        slow = n
+        fast = n
+        while True:
+            slow = getNum(slow)
+            fast = getNum(getNum(fast))
+            if slow==1 or fast==1:
+                return True
+            if slow==fast:
+                return False
+#############################环形链表####################################
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        #方案一：
+        """
+        lis = []
+        while head:
+            if head not in lis:
+                lis.append(head)
+                head = head.next
+            else:
+                return True
+        return False
+        """ 
+        #方案二：快慢指针，如果有环的话，肯定能追上
+        """
+        slow,fast = head,head
+        while fast and fast.next:
+            if not fast.next:
+                return False           
+            slow = slow.next
+            fast = fast.next.next
+            if slow==fast:
+                return True
+        """
+        slow,fast = head,head
+        while fast and fast.next:                     
+            slow = slow.next
+            fast = fast.next.next
+            if slow==fast:
+                return True
+        return False
+#################################环形链表Ⅱ################################
+#返回入环节点
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        """
+        head_lis = [] 
+        while head:
+            if not head.next:
+                return None
+            #这里面环可能数值相等，所以用head
+            if head not in head_lis:
+                head_lis.append(head)
+            else:
+                return head
+            head = head.next
+        """
+        #快慢指针：数学分析题，头到环入口：a,环长度b. 第一次相遇f = 2s,且
+        #这一步f = s+ nb 很关键:快指针一定比慢指针多找nb(n个环长度，n未知)
+        #可以推出s = nb，也就是第一次相遇慢指针走了n圈。
+        #最重要的推理：此时两针相遇，如果慢指针再走a步，总的步数：a+nb，此时slow一定在入口处，而a未知。
+        #此时将fast = head,走了a步的时候，也就是跟slow相等，就是环入口处
+        slow,fast = head,head
+        while fast and fast.next:
+            if not fast.next:
+                return None
+            slow = slow.next
+            fast = fast.next.next
+            if slow==fast:
+                fast = head
+                while True:
+                    if slow==fast:
+                        return slow
+                    else:
+                        slow = slow.next
+                        fast = fast.next
