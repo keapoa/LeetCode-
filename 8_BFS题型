@@ -1,0 +1,30 @@
+##########################################二叉树最小深度#########################################
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        """
+        #BFS:容易出错叶子节点是没有子节点的节点。层次遍历的话，遍历到一个节点，其节点是子节点就返回
+        if not root:return 0
+        nodes = [root]
+        depth = 0
+        while nodes:
+            depth+=1
+            tmp = []
+            for node in nodes:
+                if not node.left and not node.right:
+                    return depth
+                else:
+                    if node.left:
+                        tmp.append(node.left)
+                    if node.right:
+                        tmp.append(node.right)
+            nodes = tmp
+        """
+        #DFS,要注意终止条件
+        #都为空返回0，两个都不为空，取最小值，一个为空的时候取不为空的路径:因为还没到子节点。
+        if not root: return 0
+        m1 = self.minDepth(root.left)
+        m2 = self.minDepth(root.right)
+        if not root.left or not root.right:
+            #此时如果有一个为真或者m1,m2必定有一个空值，两个为真m1,m2皆为空值。
+            return m1+m2+1
+        return min(m1,m2)+1
