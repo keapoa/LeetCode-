@@ -82,3 +82,13 @@
     十四, 子数组子串子序列等
     十五, 单调双向队列题目，单调栈    
         https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/  滑动窗口最大值    
+    十六, 二叉树遍历  
+        https://leetcode-cn.com/problems/binary-tree-inorder-traversal/  二叉树的中序遍历  
+        https://leetcode-cn.com/problems/binary-tree-preorder-traversal/  二叉树的前序遍历  
+        https://leetcode-cn.com/problems/binary-tree-postorder-traversal/  二叉树的后续遍历  
+        https://leetcode-cn.com/problems/binary-tree-level-order-traversal/  二叉树的层序遍历  
+        https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/  二叉树的层序遍历Ⅱ  
+        https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/  N叉树的前序遍历  
+        https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/  N叉树的后序遍历  
+        https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/ M叉树的层序遍历  
+        
