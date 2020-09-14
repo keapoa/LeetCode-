@@ -1,0 +1,29 @@
+###############二叉树的中序遍历################，DFS很简单，重点掌握迭代法，其本质就是模拟递归过程，利用栈+当前变量。
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        """
+        res = []
+        def DFS(root):
+            if not root:return
+            DFS(root.left)
+            res.append(root.val)
+            DFS(root.right)
+        DFS(root)
+        return res
+        """
+        #迭代,栈空间，模拟迭代过程：
+        res = []
+        #保存当前所有根节点
+        stack = []
+        #当前节点
+        cur = root
+        while stack or cur:
+            #遍历当前节点，一直找到最左边叶子节点
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            #弹出最后一个叶子节点
+            cur = stack.pop()
+            res.append(cur.val)
+            cur = cur.right
+        return res
