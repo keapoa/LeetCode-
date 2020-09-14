@@ -1,0 +1,96 @@
+###############二叉树的遍历################，DFS很简单，重点掌握迭代法，其本质就是模拟递归过程，利用栈+当前变量。
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        #DFS通用解法
+        """
+        res = []
+        def DFS(root):
+            if not root:return
+            #中序遍历#
+            DFS(root.left)
+            res.append(root.val)
+            DFS(root.right)
+            #前序遍历#
+            res.append(root.val)
+            DFS(root.left)
+            DFS(root.right)
+            #后序遍历#
+            DFS(root.left)
+            DFS(root.right)
+            root.append(root.val)
+        DFS(root)
+        return res
+        """
+        #迭代,栈空间，模拟迭代过程：中序遍历 .迭代过程就是模拟递归过程，注意root.val添加的位置。 
+        res = []
+        #保存当前所有根节点
+        stack = []
+        #当前节点
+        cur = root
+        while stack or cur:
+            #遍历当前节点，一直找到最左边叶子节点
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            #弹出最后一个叶子节点
+            cur = stack.pop()
+            res.append(cur.val)
+            cur = cur.right
+        return res
+        """
+        #迭代法: 前序遍历  
+        stack = []
+        cur = root
+        res = []
+        while stack or cur:    
+            while cur:
+                res.append(cur.val)
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            cur = cur.right
+        return res
+        """
+        """
+        #后序遍历：左右中->中右左。
+        stack = []
+        res = []
+        cur = root
+        while stack or cur:
+            while cur:
+                res.append(cur.val)
+                stack.append(cur)
+                cur = cur.right
+            cur = stack.pop()
+            cur = cur.left
+        return res[::-1]
+        """
+        ##########另外一种迭代#############
+        #前序遍历->中前后
+        """
+        if not root:
+            return []
+        stack = [root]
+        res = []
+        while stack:
+            cur = stack.pop()
+            res.append(root.val)
+            if cur.right:
+                stack.append(cur.right)
+            if cur.left:
+                stack.append(cur.left)
+        return res
+        """
+        #后序遍历->前后中->中后前
+        if not root:
+            return []
+        stack = [root]
+        res = []
+        while stack:
+            cur = stack.pop()
+            res.append(root.val)
+            if cur.left:
+                stack.append(cur.left)
+            if cur.right:
+                stack.append(cur.right)
+        return res[::-1]
