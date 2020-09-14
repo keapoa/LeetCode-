@@ -94,3 +94,39 @@ class Solution:
             if cur.right:
                 stack.append(cur.right)
         return res[::-1]
+##############N叉树遍历###############
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        #先遍历根节点，在一次遍历孩子节点
+        res = []
+        def DFS(root):
+            if not root:
+                return
+            res.append(root.val) 
+            for i in root.children:
+                DFS(i)
+        DFS(root)
+        return res
+###############N叉树层序遍历###############层序遍历都是一个套路
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        if not root:
+            return []
+        res = []
+        nodes = [root]
+        while nodes:
+            tmp = []
+            node_lis = [] 
+            for node in nodes:
+                node_lis.append(node.val)
+                for i in node.children:
+                    tmp.append(i)
+            res.append(node_lis)
+            nodes = tmp
+        return res
