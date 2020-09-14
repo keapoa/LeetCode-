@@ -83,6 +83,7 @@
     十五, 单调双向队列题目，单调栈    
         https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/  滑动窗口最大值    
     十六, 二叉树遍历  
+        #一般有DFS和迭代法，DFS较简单，迭代法常用一个栈一个当前变量，对于后序遍历左右中通常转为中右左进行遍历，结果取反即可。  
         https://leetcode-cn.com/problems/binary-tree-inorder-traversal/  二叉树的中序遍历  
         https://leetcode-cn.com/problems/binary-tree-preorder-traversal/  二叉树的前序遍历  
         https://leetcode-cn.com/problems/binary-tree-postorder-traversal/  二叉树的后续遍历  
