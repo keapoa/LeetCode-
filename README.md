@@ -87,10 +87,10 @@
         #对于前序后序迭代：中在前面，直接一个栈即可，注意先入后出。比如前序->中前后，需要先入后在入前，会先弹出前。中序遍历：前中后
         https://leetcode-cn.com/problems/binary-tree-inorder-traversal/  二叉树的中序遍历  
         https://leetcode-cn.com/problems/binary-tree-preorder-traversal/  二叉树的前序遍历  
-        https://leetcode-cn.com/problems/binary-tree-postorder-traversal/  二叉树的后续遍历  
+        https://leetcode-cn.com/problems/binary-tree-postorder-traversal/  二叉树的后序遍历  
         https://leetcode-cn.com/problems/binary-tree-level-order-traversal/  二叉树的层序遍历  
         https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/  二叉树的层序遍历Ⅱ  
         https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/  N叉树的前序遍历  
         https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/  N叉树的后序遍历  
-        https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/ M叉树的层序遍历  
+        https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/ N叉树的层序遍历  
         
