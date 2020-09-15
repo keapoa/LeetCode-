@@ -98,8 +98,10 @@
     十七, 二叉树深度理解递归  
         #1:明确函数定义是什么。2:明确子树做什么。3:明确终止条件是什么。4:如何将子问题转化为大问题。  
         #二叉树题目均可这样思考。这里挑个别题目    
-        #这种题目：可以前序(有点自顶向下的意思)走也可以后序(有点自底向上的意思)走。  
-        https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/  二叉树转化为单链表->就是单向子树，均指向右边。    
+        #这种题目：可以前序(有点自顶向下的意思)走也可以后序(有点自底向上的意思)走。
+        #前序：中-前-后,先判断中间，递归两边。后序：前-后-中，先递归前后，后判断中。
+        https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/  二叉树转化为单链表->就是单向子树均指向右边。    
         https://leetcode-cn.com/problems/invert-binary-tree/  翻转二叉树    
+        https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/  平衡二叉树  
         
         
