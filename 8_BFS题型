@@ -28,3 +28,32 @@ class Solution:
             #此时如果有一个为真或者m1,m2必定有一个空值，两个为真m1,m2皆为空值。
             return m1+m2+1
         return min(m1,m2)+1
+###############################填充每个节点的下一个节点############################
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        #BFS
+        if not root: return root
+        nodes = [root]
+        while nodes:
+            tmp = []
+            for i in range(len(nodes)):
+                if i+1<len(nodes):
+                    nodes[i].next=nodes[i+1]
+                else:
+                    nodes[i].next = None
+                if nodes[i].left:
+                    tmp.append(nodes[i].left)
+                if nodes[i].right:
+                    tmp.append(nodes[i].right)
+            nodes = tmp
+        return root
