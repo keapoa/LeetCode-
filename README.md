@@ -103,5 +103,7 @@
         https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/  二叉树转化为单链表->就是单向子树均指向右边。      
         https://leetcode-cn.com/problems/invert-binary-tree/  翻转二叉树      
         https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/  平衡二叉树    
+    剑指offer专题  
+    https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/  圆圈中最后剩下的数字，约瑟夫环  
         
         
