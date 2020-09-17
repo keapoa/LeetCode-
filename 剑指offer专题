@@ -1,0 +1,37 @@
+1，圆圈中最后剩余的数字  约瑟夫环  
+class Solution:
+    def lastRemaining(self, n: int, m: int) -> int:
+        #传说中的约瑟夫环？？
+        #数学思路：
+        """
+        #最容易想到的思路是模拟这个过程
+        #初始索引i = 0
+        i = 0
+        #构建一个数组
+        lis = list(range(n))
+        #循环，每次都会删除一个，当偏移后索引大于m的时候，取余
+
+        while len(lis) > 1:
+            #获取要删除的索引,这里删除第m个数，因此是+m-1
+            i = (i+m-1)%len(lis)
+            lis.pop(i)
+        return lis[0]
+        """
+
+        """约瑟夫递推公式"""
+        #定义f(n,m)为长度为n时，偏移m，返回的索引
+        #f(n,m) = (f(n-1,m) + m) % n
+        #初始化n=1时,pos = 0
+        """
+        递归占用空间太大O(N)
+        def f(n,m):
+            if n==1:
+                return 0
+            return (f(n-1,m)+m) % n
+        return f(n,m)
+        """
+        #递归公式写成for 循环省了空间
+        index = 0
+        for i in range(2,n+1):
+            index = (index+m) % i
+        return index
